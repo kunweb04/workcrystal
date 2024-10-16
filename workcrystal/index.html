@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>晶体化学结晶作品展示</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9; /* 背景色 */
+            margin: 0;
+            padding: 0;
+            color: #333; /* 字体颜色 */
+        }
+        header {
+            background-color: #2c3e50; /* 主色调 */
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 2.5em; /* 标题字体大小 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 自适应列数 */
+            gap: 20px; /* 项目之间的间距 */
+        }
+        .card {
+            background: white;
+            border-radius: 15px; /* 圆角 */
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* 相对定位 */
+            transition: transform 0.2s; /* 过渡效果 */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* 悬停效果 */
+        }
+        .image-gallery {
+            position: relative;
+            cursor: pointer; /* 指针变化 */
+            height: 0;
+            padding-bottom: 100%; /* 保持正方形比例 */
+            overflow: hidden; /* 避免内容溢出 */
+        }
+        .image-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保持图片比例，裁剪多余部分 */
+            border-bottom: 5px solid #2980b9; /* 底部边框 */
+        }
+        .card-content {
+            padding: 20px; /* 内边距 */
+            text-align: center; /* 内容居中 */
+        }
+        .card-content h3 {
+            margin: 10px 0; /* 标题上下边距 */
+            font-size: 1.5em; /* 标题大小 */
+            color: #2c3e50; /* 标题颜色 */
+        }
+        .card-content p {
+            margin: 0;
+            line-height: 1.5; /* 行高 */
+            color: #555; /* 描述颜色 */
+        }
+        .modal {
+            display: none; /* 默认隐藏模态框 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* 确保模态框在最上层 */
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal.active {
+            display: flex; /* 显示模态框 */
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50; /* 底部颜色 */
+            color: white;
+            font-size: 1em; /* 小字体 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        晶体化学结晶作品展示
+    </header>
+    <div class="container">
+        <div class="card">
+            <div class="image-gallery" onclick="openModal(0)">
+                <img src="crystal1_1.jpg" alt="结晶作品1-图片1">
+            </div>
+            <div class="card-content">
+                <h3>硫酸亚铁铵</h3>
+                <p>无机化合物，铵盐类，蓝绿色的六水合晶体</p>
+                <p>晶体结构为八面体，属于正交晶系</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="image-gallery" onclick="openModal(1)">
+                <img src="crystal2_1.jpg" alt="结晶作品2-图片1">
+            </div>
+            <div class="card-content">
+                <h3>硫酸铜</h3>
+                <p>无机化合物，铵盐类，蓝绿色的六水合晶体</p>
+                <p>晶体结构为八面体，属于正交晶系</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-image" src="" alt="放大查看">
+    </div>
+
+    <footer>
+        © 2024 晶体化学展览
+    </footer>
+
+    <script>
+        const images = [
+            ["crystal1_1.jpg", "crystal1_2.jpg", "crystal1_3.jpg"],
+            ["crystal2_1.jpg", "crystal2_2.jpg", "crystal2_3.jpg"],
+            ["crystal3_1.jpg", "crystal3_2.jpg", "crystal3_3.jpg"],
+            ["crystal4_1.jpg", "crystal4_2.jpg", "crystal4_3.jpg"],
+            ["crystal5_1.jpg", "crystal5_2.jpg", "crystal5_3.jpg"]
+        ];
+
+        function openModal(index) {
+            const modal = document.getElementById("modal");
+            const modalImage = document.getElementById("modal-image");
+            modal.classList.add("active");
+            modalImage.src = images[index][0]; // 默认显示第一个图片
+            modalImage.setAttribute("data-index", 0);
+            modalImage.setAttribute("data-card", index);
+            modalImage.onclick = function() {
+                nextImage(modalImage);
+            };
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("modal");
+            modal.classList.remove("active");
+        }
+
+        function nextImage(image) {
+            const cardIndex = image.getAttribute("data-card");
+            let currentIndex = parseInt(image.getAttribute("data-index"));
+            currentIndex = (currentIndex + 1) % images[cardIndex].length; // 循环显示
+            image.src = images[cardIndex][currentIndex];
+            image.setAttribute("data-index", currentIndex);
+        }
+    </script>
+</body>
+</html>
