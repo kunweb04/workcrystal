@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>晶体培养实验室</title>
+    <style>
+        /* 继承原有配色 */
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+        }
+
+        /* 新增主页样式 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .card a:hover {
+            background: var(--secondary);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <!-- 主页横幅 -->
+            <section class="hero">
+                <h1>晶体培养指南</h1>
+                <p>
+                    探索晶体生长的奥秘，从基础结晶到高级培养，
+                    一些我对晶体化学的见解。
+                </p>
+            </section>
+
+            <!-- 专题卡片 -->
+            <div class="card-grid">
+                <article class="card">
+                    <img src="crystal01_1.png" alt="01">
+                    <div class="card-content">
+                        <h3>01结晶方式</h3>
+                        <p>晶体生长的基本原理，掌握平底结晶法和悬晶法，
+                           了解溶液配置和注意事项。
+                        </p>
+                        <a href="basic-crystallization.html">阅读全文</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="crystal02_1.png" alt="02">
+                    <div class="card-content">
+                        <h3>02晶体结构</h3>
+                        <p>了解晶系分类，晶体结构等。</p>
+                        <a>敬请期待</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="crystal03_1.png" alt="03">
+                    <div class="card-content">
+                        <h3>03入门晶体-硫酸铜</h3>
+                        <p>神秘的铵盐晶体，怎么培养这个晶体？</p>
+                        <a>敬请期待</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="crystal04_1.png" alt="04">
+                    <div class="card-content">
+                        <h3>04入门晶体-硫酸铝钾</h3>
+                        <p>有趣的包容性晶体，为什么他能做混晶？</p>
+                        <a>敬请期待</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

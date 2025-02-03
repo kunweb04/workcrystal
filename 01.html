@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>晶体化学指南 - 01结晶方式篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        /* 导航样式 */
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+            align-self: start;
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            border-left: 4px solid var(--secondary);
+            padding-left: 12px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .nav a:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* 内容区域 */
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: var(--primary);
+            margin-bottom: 1em;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2em 0 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2em;
+            border-radius: 12px;
+            margin: 2em 0;
+            border: 1px solid #e3e9f1;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 1em 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .pros { color: #4CAF50; }
+        .cons { color: #F44336; }
+
+        /* 步骤列表优化 */
+        .step-list {
+            counter-reset: step-counter;
+            margin: 1.5em 0;
+        }
+        .step-item {
+            position: relative;
+            padding: 1.2em 0 1.2em 3em;
+            border-left: 3px solid var(--accent);
+            margin: 1.5em 0;
+            transition: 0.3s;
+        }
+        .step-item:hover {
+            border-left-color: var(--secondary);
+        }
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -0.8em;
+            top: 1.2em;
+            width: 1.8em;
+            height: 1.8em;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .step-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.6em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .step-title::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary);
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .step-detail {
+            color: #666;
+            line-height: 1.7;
+            padding-left: 1.2em;
+            position: relative;
+        }
+        .step-detail::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 0.9em;
+        }
+
+        /* Q&A样式 */
+        .qa-section {
+            background: #f8fbfe;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 2em 0;
+            border: 1px solid #e3e9f1;
+        }
+        .qa-item {
+            margin: 1.5em 0;
+        }
+        .qa-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .qa-item h4::before {
+            content: "❓";
+            font-size: 1.2em;
+        }
+        .qa-item p {
+            padding-left: 32px;
+            position: relative;
+        }
+        .qa-item p::before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .nav {
+                position: static;
+                order: -1;
+                margin: 40px 0;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">01结晶方式篇</span></h1>
+
+            <section id="method1">
+                <h2>平底结晶法</h2>
+                <div class="method-card">
+                    <h3>⚗️ 基础方法</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong>优势领域：</strong>
+                            <ul>
+                                <li>操作难度低</li>
+                                <li>结晶效率高、周期短</li>
+                                <li>成本低廉</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong>劣势领域：</strong>
+                            <ul>
+                                <li>晶体结构不完整</li>
+                                <li>底面必然平坦</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>📌 操作步骤</h3>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-title">选择容器</div>
+                            <div class="step-detail">使用惰性材质容器（推荐结晶皿或玻璃容器）</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">倒入溶液</div>
+                            <div class="step-detail">注意倒入量不宜过多，防止溶液沿容器壁爬升导致晶体溢出</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">覆盖材料</div>
+                            <div class="step-detail">建议使用卫生纸或不织布，既保证透气又防止灰尘落入</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">定期观察</div>
+                            <div class="step-detail">根据溶液浓度变化调整，建议每两天观察一次</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="method2">
+                <h2>悬晶法</h2>
+                <div class="method-card">
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong>优势领域：</strong>
+                            <ul>
+                                <li>完整晶体结构</li>
+                                <li>高观赏价值</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong>技术难点：</strong>
+                            <ul>
+                                <li>需基础晶体</li>
+                                <li>维护周期长</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>🎯 关键步骤</h3>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-title">挑选晶种</div>
+                            <div class="step-detail">从平底结晶法制得的成品中精选优质晶种</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">清洗处理</div>
+                            <div class="step-detail">使用蒸馏水确保晶种纯净</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">晶种悬挂</div>
+                            <div class="step-detail">透明线悬挂溶液中央（严禁棉线），预留调整长度</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">溶液维护</div>
+                            <div class="step-detail">定期清理多余单晶并更换溶液</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="notes">
+                <h2>实验注意事项</h2>
+                <div class="method-card">
+                    <h3>⚠️ 溶液控制</h3>
+                    <ul>
+                        <li>严格调控浓度和温度防止晶种溶解</li>
+                        <li>按摩尔比精确配比，双重过滤确保溶液纯净</li>
+                    </ul>
+
+                    <h3>🔬 操作规范</h3>
+                    <ul>
+                        <li>避免震动干扰</li>
+                        <li>控制温度波动在±3℃内</li>
+                    </ul>
+
+                    <h3>应对"大饼"现象</h3>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-title">检查洁净度</div>
+                            <div class="step-detail">重新过滤溶液，减少杂质</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">增加防震效果</div>
+                            <div class="step-detail">放置减震材料或者移动到没有震动的空间</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-title">调整蒸发速率</div>
+                            <div class="step-detail">适当降低溶液浓度防止结晶过快导致的粘连</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="qa">
+                <h2>常见问题解答</h2>
+                <div class="qa-section">
+                    <div class="qa-item">
+                        <h4>为何防止震动与杂质？</h4>
+                        <p>震动会干扰晶体规则生长，导致难以形成大颗完整单晶；杂质会产生过多凝结核，易引发晶体粘连现象，我们称这个现象为大饼</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4>为何要控制温差与浓度？</h4>
+                        <p>浓度过高或温度过低会使晶体迅速析出，但可能产生生长纹影响美观。晶体生长越缓慢，透明度和完美度越高</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4>为何要勤于观察溶液状态？</h4>
+                        <p>及时监控可确保在"黄金期"发现并采集晶体，避免因生长过度出现纹路或粘连问题</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#method1">平底结晶法</a></li>
+                <li><a href="#method2">悬晶法</a></li>
+                <li><a href="#notes">注意事项</a></li>
+                <li><a href="#qa">常见问题</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // 平滑滚动功能
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
