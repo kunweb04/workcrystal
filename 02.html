@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>晶体化学指南 - 03硫酸铜篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            margin: 2em 0;
+        }
+
+        .step-item {
+            position: relative;
+            padding: 1.2em 0 1.2em 3.5em;
+            margin: 1.5em 0;
+            border-left: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            border-left-color: var(--secondary);
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -1.2em;
+            top: 1em;
+            width: 2.4em;
+            height: 2.4em;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(42,92,132,0.2);
+        }
+
+        .note {
+            background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #FFC107;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning {
+            background: linear-gradient(15deg, #ffebee 0%, #ffe5e9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #F44336;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning::before {
+            content: '⚠️';
+            position: absolute;
+            left: -1.2em;
+            top: -1em;
+            font-size: 1.8em;
+            background: white;
+            border-radius: 50%;
+            padding: 0.2em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .chemical-formula {
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            margin: 1em 0;
+            padding: 1em;
+            background: rgba(93,168,179,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        sub {
+            color: #5DA8B3;
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+            .step-item {
+                padding-left: 2.5em;
+            }
+            .note::before,
+            .warning::before {
+                left: -0.8em;
+                top: -0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">03硫酸铜篇</span></h1>
+
+            <section id="basic">
+                <h2>一、基础认识</h2>
+                
+                <div class="method-card">
+                    <h3>1.1 是什么？</h3>
+                    <p class="chemical-formula">化学式：无水硫酸铜（白色粉末）为 CuSO<sub>4</sub>；常见的是蓝色五水合物 CuSO<sub>4</sub>·5H<sub>2</sub>O，像蓝色宝石。</p>
+                    <ul>
+                        <li>溶解性：易溶于水（20℃时，100g水能溶解约32g），溶液呈蓝色</li>
+                        <li>晶系：正交晶系（斜方晶系）</li>
+                    </ul>
+                </div>
+
+                <div class="method-card">
+                    <h3>1.2 结构特点</h3>
+                    <ul>
+                        <li>蓝色晶体中的铜离子被4个水分子包围，第5个水分子通过“水桥”连接其他结构（类似拼积木）</li>
+                        <li>加热到110℃会失去结晶水，变成白色粉末（可逆反应）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="experiment">
+                <h2>二、实验与制备</h2>
+                
+                <div class="method-card">
+                    <h3>2.1 配制溶液（示例）</h3>
+                    <p>目标：配制1升浓度为0.5mol/L的硫酸铜溶液</p>
+                    <ol class="step-list">
+                        <li class="step-item">计算：需称量 0.5mol × 249.7g/mol ≈ 124.9g 五水硫酸铜</li>
+                        <li class="step-item">溶解：将晶体加入烧杯，加500mL温水搅拌至完全溶解</li>
+                        <li class="step-item">定容：转移至1L容量瓶，加水至刻度线，摇匀</li>
+                    </ol>
+                </div>
+
+                <div class="method-card">
+                    <h3>2.2 晶体生长</h3>
+                    <div class="note">
+                        <strong>💡 平底结晶法</strong>
+                        <p>材料：电镀硫酸铜、培养皿、过滤材料、镊子（塑料、镀镍）</p>
+                        
+                        <ol class="step-list">
+                            <li class="step-item">
+                                <strong>配制溶液：</strong><br>
+                                饱和溶液配置：取适量常温水，分次加入硫酸铜并加热至不再溶解
+                                <div class="note">
+                                    不太推荐新手直接配热饱和，配不饱和溶液就好<br>
+                                    虽然出晶效率慢 但容错率高<br>
+                                    饱和溶液/过饱和，配完溶液后1~3小时内就要取出晶体<br>
+                                    且过程中对震动非常敏感，容易出现大量粘连碎晶。
+                                </div>
+                            </li>
+                            <li class="step-item">过滤：用眼镜布或其他滤纸过滤溶液，去除溶液杂质</li>
+                            <li class="step-item">
+                                操作：将溶液低角度缓慢倒入培养皿，覆盖防尘材料，静置1-2天
+                                <div class="note">
+                                    注意事项：<br>
+                                    - 避免震动，注意温差不要过大（可包裹保温棉）<br>
+                                    - 若溶液浑浊或析出多过碎晶，需重新过滤或更换溶液
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                晶体处理：用镊子夹取晶体，纸巾轻压吸干表面溶液
+                                <div class="note">
+                                    此时可以选择停止、也可以重复下方步骤使晶体更大
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 进阶（有两个选项）</strong>
+                        <ol>
+                            <li>配制热饱和溶液：60℃热水中持续加入硫酸铜至无法溶解</li>
+                            <li>可以用回上次的溶液，再次过滤后可以选择悬挂晶核、或者在培养皿上放入晶核（一个培养皿最多5个）<br>
+                                倒入盖过晶核两倍的溶液（略慢于选项1）</li>
+                        </ol>
+                        <p><br>此时晶核应该会慢慢生长，过约两天后可取出</p>
+                        <div class="note">
+                            成品处理建议：<br>
+                            - 用透明指甲油涂抹晶体<br>
+                            - 用滴胶保存晶体<br>
+                            - 放入密封盒（仅限不易风化的晶体）
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="safety">
+                <h2>三、安全与注意事项</h2>
+                <div class="warning">
+                    <h3>3.1 危险性</h3>
+                    <ul>
+                        <li>毒性：误食会引起恶心、腹痛；接触眼睛会导致刺激</li>
+                        <li>环境：对水生生物有害，不可随意倾倒</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <h3>3.2 防护与应急</h3>
+                    <ul>
+                        <li>操作时：戴手套和护目镜，在通风处使用</li>
+                        <li>泄漏处理：用沙土覆盖后清扫，废料装入密封袋</li>
+                        <li>急救：误触眼睛立即用清水冲洗15分钟，及时就医</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#basic">基础认识</a></li>
+                <li><a href="#experiment">实验制备</a></li>
+                <li><a href="#safety">安全事项</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // 增强平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 100; // 滚动偏移量
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 自动折叠嵌套的note
+        document.querySelectorAll('.note .note').forEach(nestedNote => {
+            nestedNote.style.margin = '1em 0 0 2em';
+            nestedNote.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+        });
+    </script>
+</body>
+</html>
