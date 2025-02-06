@@ -312,6 +312,32 @@
                 width: 100%;
             }
         }
+
+        .image-container {
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .author-name {
+            position: absolute;
+            left: 1px; 
+            bottom: 10px;
+            color: white; 
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.9rem; 
+            z-index: 1; 
+        }
+
     </style>
 </head>
 <body>
@@ -330,18 +356,21 @@
             </div>
             <div class="card-grid">
                 <article class="card">
-                    <img src="crystal02_1_1.png" alt="结晶方式" loading="lazy">
+                    <div class="image-container">
+                    <img src="index2c1_01.png" alt="硫酸铜" loading="lazy">
+                    <div class="author-name">作者：紫色硫酸铜</div> 
+                </div>
                     <div class="card-content">
                         <div>
                             <h3>硫酸铜</h3>
                             <p class="card-meta">蓝色晶体 · 简单盐类</p>
                         </div>
-                        <p>初次晶体制作，可以做到送女朋友的等级吗？</p>
+                        <p>初次晶体制作，可以做到送女朋友的级别吗？</p>
                         <div class="card-footer">
-                            <a href="02.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
+                            <a href="001.html">阅读全文 →</a>
+                </div>
+            </div>
+        </article>
 
                 <article class="card">
                     <img src="x.png" alt="" loading="lazy">

@@ -312,6 +312,32 @@
                 width: 100%;
             }
         }
+
+        .image-container {
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .author-name {
+            position: absolute;
+            left: 1px; 
+            bottom: 10px;
+            color: white; 
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.9rem; 
+            z-index: 1; 
+        }
+
     </style>
 </head>
 <body>
@@ -375,10 +401,12 @@
             <div class="section-title">
                 <h2>专题</h2>
             </div>
-
             <div class="card-grid">
                 <article class="card">
-                    <img src="crystal01_1.png" alt="结晶方式" loading="lazy">
+                    <div class="image-container">
+                    <img src="indexc2_01.png" alt="结晶方式" loading="lazy">
+                    <div class="author-name">作者：LX虫管吖Galvin</div> 
+                </div>
                     <div class="card-content">
                         <div>
                             <h3>结晶方式</h3>
@@ -392,7 +420,10 @@
                 </article>
 
                 <article class="card">
-                    <img src="crystal02_1.png" alt="硫酸铜晶体" loading="lazy">
+                    <div class="image-container">
+                    <img src="indexc2_02.png" alt="入门晶体" loading="lazy">
+                    <div class="author-name">作者：紫色硫酸铜</div> 
+                </div>
                     <div class="card-content">
                         <div>
                             <h3>入门晶体</h3>
@@ -404,7 +435,6 @@
                         </div>
                     </div>
                 </article>
-
                 <article class="card">
                     <img src="x.png" alt="" loading="lazy">
                     <div class="card-content">
