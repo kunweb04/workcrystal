@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>晶体化学指南 - 安全与操作规范篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            margin: 2em 0;
+        }
+
+        .step-item {
+            position: relative;
+            padding: 1.2em 0 1.2em 3.5em;
+            margin: 1.5em 0;
+            border-left: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            border-left-color: var(--secondary);
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -1.2em;
+            top: 1em;
+            width: 2.4em;
+            height: 2.4em;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(42,92,132,0.2);
+        }
+
+        .note {
+            background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #FFC107;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning {
+            background: linear-gradient(15deg, #ffebee 0%, #ffe5e9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #F44336;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning::before {
+            content: '⚠️';
+            position: absolute;
+            left: -1.2em;
+            top: -1em;
+            font-size: 1.8em;
+            background: white;
+            border-radius: 50%;
+            padding: 0.2em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+            .step-item {
+                padding-left: 2.5em;
+            }
+            .note::before,
+            .warning::before {
+                left: -0.8em;
+                top: -0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">安全与操作规范篇</span></h1>
+
+            <section id="safety">
+                <h2>基本安全守则</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">避免皮肤接触</div>
+                            <div class="step-detail">处理溶液时请佩戴乳胶手套或丁腈手套，防止化学物质渗透皮肤。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">防护措施到位</div>
+                            <div class="step-detail">进行实验时应佩戴护目镜，必要时使用口罩或面罩，确保环境通风良好。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">慎重对待毒性晶体</div>
+                            <div class="step-detail">如赤血盐（或其他具有一定毒性的晶体），务必采取严格的防护措施，避免摄入或吸入粉尘。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">使用专业器材</div>
+                            <div class="step-detail">建议使用玻璃搅拌棒或实验室级别的工具搅拌溶液，而非随手可得的餐具（如果你八字够硬 可以学学某个lz用筷子搅拌溶液后下意识嗦一口）。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">晶体直接接触</div>
+                            <div class="step-detail">无论你的是已经喷漆、还是涂好指甲油的，都不要用手直接触碰。</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cleanup">
+                <h2>操作后的清理与废液处理</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">作后清洁</div>
+                            <div class="step-detail">实验完成后，立即清洗台面，避免残留化学物质污染环境或造成意外接触。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">洗手消毒</div>
+                            <div class="step-detail">操作完毕后务必彻底清洗双手，确保无化学残留。</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">废液处理</div>
+                            <div class="step-detail">不得随意将废液倒入下水道，需根据化学性质进行还原处理或无害化处理，确保环保与安全。</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#safety">基本安全守则</a></li>
+                <li><a href="#cleanup">清理与废液处理</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // 增强平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 100; // 滚动偏移量
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 自动折叠嵌套的note
+        document.querySelectorAll('.note .note').forEach(nestedNote => {
+            nestedNote.style.margin = '1em 0 0 2em';
+            nestedNote.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+        });
+    </script>
+</body>
+</html>
