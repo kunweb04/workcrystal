@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>晶体培养指南</title>
     <style>
-        :root {
+                :root {
             --primary: #2A5C84;
             --secondary: #5DA8B3;
             --accent: #C4D4E0;
@@ -139,7 +139,8 @@
         /* 卡片系统 */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-flow: dense;
             gap: 2rem;
             margin: 3rem 0;
         }
@@ -307,6 +308,10 @@
                 gap: 0.5rem;
             }
 
+            .card-grid {
+                grid-template-columns: 1fr; 
+            }
+
             .section-title::before,
             .section-title::after {
                 width: 100%;
@@ -338,6 +343,17 @@
             z-index: 1; 
         }
 
+        .site-footer {
+            padding: 1.5rem 2rem;
+            color: var(--primary);
+            background: var(--accent);
+            margin-top: 3rem;
+            text-align: left;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        
     </style>
 </head>
 <body>
@@ -376,10 +392,10 @@
                     <img src="x.png" alt="" loading="lazy">
                     <div class="card-content">
                         <div>
-                            <h3>尚未定稿</h3>
-                            <p class="card-meta">____ · ____</p>
+                            <h3>磷酸二氢钾</h3>
+                            <p class="card-meta">透明晶体 · 光学材料</p>
                         </div>
-                        <p>___________</p>
+                        <p>高透明度、适合培养大单晶</p>
                         <div class="card-footer">
                             <a disabled>敬请期待</a>
                         </div>
@@ -389,6 +405,9 @@
             </div>
             <div class="section-divider"></div>
         </main>
+        <footer class="site-footer">
+            本站作者：麒麟（kun）
+        </footer>
     </div>
 
     <script>
