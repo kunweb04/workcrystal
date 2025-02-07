@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 晶体保存篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .chemical-formula {
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            margin: 1em 0;
+            padding: 1em;
+            background: rgba(93,168,179,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        sub {
+            color: #5DA8B3;
+            font-size: 0.8em;
+        }
+
+        .note {
+            background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #FFC107;
+            margin: 2em 0;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">晶体保存篇</span></h1>
+
+            <section id="basic">
+                <h2>基础认识</h2>
+                <div class="method-card">
+                    <p>不同的晶体各自有自己的最好保存方法，这里按照观赏效果排名做分类。<br>
+                        以下资料源自用户 紫色硫酸铜</p>
+                </div>
+            </section>
+
+            <section id="x1">
+                <h2>No.1 PE悬浮盒保存（最推荐）</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <p>PE悬浮盒是一种形状扁的中间是透明塑料膜 四周是固定塑料膜的塑料框架（塑料框架有多种颜色）
+                            的盒子 关闭并且未装物品时 盒子中间的两片柔软的塑料膜贴合在一起 装晶体时 打开盒子把晶体
+                            放在塑料膜中间 关闭盒子让塑料膜固定晶体 以达到保存目的</p>
+                    </ul>
+                    <br>
+                    <p>另外</p>
+                    <br>
+                    <ul class="step-list">
+                        <li>如果要保存的晶体容易潮解、氧化，则在关闭盒子后戴上手套把晶体四周的塑料薄膜捏合，使晶体处于封闭环境不接触空气</li>
+                        <li>若晶体易风化并且想用悬浮盒保存，则把塑料膜里的空气留少一些（不过大部分情况下这样只能减缓晶体的风化速度）</li>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>保存晶体所需空间相比其他方法更多 难保存易风化的晶体</p>
+                            <p>且悬浮盒并没有防尘功能，因此需在盒子上方加设防尘物体</p>
+                        </div>
+                        <img src="x1.png" alt="" loading="lazy" style="width:100%;max-height:400px;object-position: 
+                        center top; border-radius:12px; margin:2em 0; box-shadow:0 8px 24px rgba(0,0,0,0.1);">
+                    </ul>
+                </div>
+            </section>
+
+            <section id="x2">
+                <h2>No.2 指甲油保存法</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li>在晶体表面先后涂两层指甲油以达到保存目的 此方法可以保存易风化 氧化 潮解的各种晶体</li>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>不能保存可以和指甲油反应或者溶于指甲油的晶体 涂指甲油后晶体一定程度上会失去规整的形状(最大痛点)</p>
+                        </div>
+                        <div class="note">
+                            <strong>警告：</strong>
+                            <p>即使晶体已经涂上指甲油，但仍然不可用手触摸</p>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="x3">
+                <h2>No.3 滴胶保存法</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li>把晶体保存在滴胶内 随时拿出观赏(最后呈现的效果是透明方块内包装着晶体) </li>
+                        <p>可考虑购置滴胶模具</p>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>需要一定滴胶技术，不然容易在保存时在“透明方块”内出现气泡破坏观赏效果。此方法不能保存能和滴胶反应的晶体以及一些滴胶凝固时会使晶体经历高温的环境 一些滴胶呈碱性 需要注意这些是否会破坏晶体</p>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="x4">
+                <h2>No.4 西林瓶保存（最推荐）</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li>把晶体放在西林瓶里保存</li>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>无法保存很大的晶体 易风化的晶体 不能频繁移动西林瓶否则晶体磕碰瓶壁损伤</p>
+                        </div>
+                        <img src="x4.png" alt="" loading="lazy" style="width:100%;max-height:400px;object-position: 
+                        center top; border-radius:12px; margin:2em 0; box-shadow:0 8px 24px rgba(0,0,0,0.1);">
+                    </ul>
+                </div>
+            </section>
+
+            <section id="x5">
+                <h2>No.5 石蜡油保存晶体(易风化晶体专用)</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li>把晶体放在盛有石蜡油的瓶子中保存</li>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>因为石蜡油的折射率和晶体相近 晶体看起来棱角感没有在空气里分明</p>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="x6">
+                <h2>No.6 玻封保存晶体</h2>
+                <div class="method-card">
+                    <ul class="step-list">
+                        <li>将晶体封存在全封闭玻璃内保存</li>
+                        <p>一般是把晶体置入玻璃试管，用喷枪加热上方玻璃时期融化形成密闭空间</p>
+                        <div class="note">
+                            <strong>缺点：</strong>
+                            <p>因为玻璃内环境依然是气体(或真空) 此方法依然不能保存易风化的晶体 以及用玻封后若频繁移动玻封(此处玻封为名词) 晶体会和玻璃碰撞损伤 玻璃上也会带有晶体留下的痕迹 破坏观赏效果</p>
+                        </div>
+                        <img src="x6.png" alt="" loading="lazy" style="width:100%;max-height:400px;object-position: 
+                        center top; border-radius:12px; margin:2em 0; box-shadow:0 8px 24px rgba(0,0,0,0.1);">
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#basic">基础认识</a></li>
+                <li><a href="#x1">悬浮盒保存</a></li>
+                <li><a href="#x2">指甲油保存</a></li>
+                <li><a href="#x3">滴胶保存</a></li>
+                <li><a href="#x4">西林瓶保存</a></li>
+                <li><a href="#x5">石蜡油保存</a></li>
+                <li><a href="#x6">玻封保存</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 100;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
