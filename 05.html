@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 溶液配置篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            margin: 2em 0;
+        }
+
+        .step-item {
+            position: relative;
+            padding: 1.2em 0 1.2em 3.5em;
+            margin: 1.5em 0;
+            border-left: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            border-left-color: var(--secondary);
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -1.2em;
+            top: 1em;
+            width: 2.4em;
+            height: 2.4em;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(42,92,132,0.2);
+        }
+
+        .note {
+            background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #FFC107;
+            margin: 2em 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background: linear-gradient(15deg, #ffebee 0%, #ffe5e9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #F44336;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning::before {
+            content: '⚠️';
+            position: absolute;
+            left: -1.2em;
+            top: -1em;
+            font-size: 1.8em;
+            background: white;
+            border-radius: 50%;
+            padding: 0.2em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+            .step-item {
+                padding-left: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">溶液配置篇</span></h1>
+
+            <section id="concentration">
+                <h2>一、浓度问题</h2>
+                <div class="method-card">
+                    <h3>1.1 热饱和溶液与不饱和溶液的主要区别</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-detail">
+                                热饱和溶液：在较高温度下溶解了最大量的溶质，冷却后会迅速达到过饱和状态，导致晶体快速析出
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-detail">
+                                不饱和溶液：溶质含量低于饱和状态，需要水分蒸发或温度降低到某一临界点才能达到饱和，从而开始析晶
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h3>1.2 析晶速率的决定因素</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-detail">
+                                热饱和溶液：由于温度下降使溶解度迅速降低，导致溶质迅速析出，析晶速率较快
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-detail">
+                                不饱和溶液：析晶取决于溶剂蒸发速率和浓度变化，通常较慢
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h3>1.3 出现饼的概率</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-detail">
+                                热饱和溶液：析晶速率快，未形成良好晶核时，溶质可能直接在容器内大面积沉积，形成结壳，俗称“饼”
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-detail">
+                                不饱和溶液：析晶速率较慢，通常能形成更稳定的晶体结构，减少结壳现象
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="supersaturation">
+                <h2>二、过饱和溶液的形成</h2>
+                <div class="method-card">
+                    <h3>2.1 过饱和溶液配置</h3>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-detail">
+                                在特定温度（如 60℃、70℃）下，加入溶质并充分搅拌，若仍有未溶解的固体，溶液达到饱和状态<br>
+                                降温后，溶液可能进入过饱和状态（亚稳定），即溶质超过正常溶解度但仍保持溶解状态，此时溶液随时可能开始结晶
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>2.2 过饱和溶液的控制方法</h3>
+                    <ul class="step-list">
+                        <li class="step-item">保持温度稳定：避免温度波动导致突然析晶</li>
+                        <li class="step-item">使用过滤去除杂质：减少意外成核点</li>
+                        <li class="step-item">缓慢降温：延长过饱和状态的持续时间，获得更均匀的晶体</li>
+                        <li class="step-item">引入晶种：微量晶种可引导结晶，避免随机析出（注意晶种不要被溶解）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="stability">
+                <h2>三、影响溶液稳定性的因素</h2>
+                <div class="method-card">
+                    <h3>3.1 温度对溶液稳定性的影响</h3>
+                    <ul class="step-list">
+                        <li class="step-item">升温：通常增加溶解度</li>
+                        <li class="step-item">降温：可能导致析晶或沉淀</li>
+                        <li class="step-item">温度波动：过快的温度变化会导致成核不均匀</li>
+                    </ul>
+
+                    <h3>3.2 溶剂的选择与混合</h3>
+                    <ul class="step-list">
+                        <li class="step-item">不同溶剂：同一物质在不同溶剂中的溶解度不同，合理选择可提高结晶质量</li>
+                        <li class="step-item">混合溶剂：可调节溶解度，精确控制析晶过程</li>
+                    </ul>
+                    <div class="warning">（这里放出来仅供了解，新人千万别试）</div>
+
+                    <h3>3.3 杂质的影响</h3>
+                    <div class="step-item">
+                        <div class="step-detail">
+                            杂质可能成为结晶中心，影响晶体形态。<br>
+                            可通过过滤或重结晶提高溶液纯度。
+                        </div>
+                    </div>
+
+                    <h3>3.4 机械扰动的影响</h3>
+                    <ul class="step-list">
+                        <li class="step-item">震动、搅拌：加速成核，导致晶粒变小</li>
+                        <li class="step-item">静置：有助于大单晶的生长</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="optimization">
+                <h2>四、结晶实验的优化与常见问题解决</h2>
+                <div class="method-card">
+                    <h3>4.1 结晶实验的优化策略</h3>
+                    <ul class="step-list">
+                        <li class="step-item">温控策略：采用恒温冷却，提高晶体均匀性</li>
+                        <li class="step-item">缓慢蒸发：减少无序析晶，提高晶体纯度</li>
+                        <li class="step-item">晶种诱导：使用晶种引导结晶，控制晶体大小和形态</li>
+                    </ul>
+
+                    <h3>4.2 结晶失败的常见问题及解决方案</h3>
+                    <div class="warning">
+                        <strong>问题1: 形成“饼”</strong>
+                        <ul>
+                            <li>可能原因: 过快析晶、溶剂挥发过快</li>
+                            <li>解决方案: 缓慢降温、降低蒸发速率</li>
+                        </ul>
+                    </div>
+                    <div class="warning">
+                        <strong>问题2: 结晶太小或无规则</strong>
+                        <ul>
+                            <li>可能原因: 成核过快、搅拌过强</li>
+                            <li>解决方案: 降低冷却速率，减少搅拌</li>
+                        </ul>
+                    </div>
+
+                    <h3>4.3 如何提高晶体纯度</h3>
+                    <ul class="step-list">
+                        <li class="step-item">重结晶：多次溶解和析晶，提高纯度</li>
+                        <li class="step-item">过滤和洗涤：去除母液中的杂质，提高晶体质量</li>
+                        <li class="step-item">吸附法: 利用特定吸附剂（如活性炭、硅胶等）吸附溶液中的杂质。适合用于去除色素或一些小分子杂质</li>
+                    </ul>
+
+                    <h3>4.4 补充</h3>
+                    <div class="note">
+                        <strong>大佬们的习惯参考：</strong>
+                        <p>滴水法：每次溶液出晶时取出后滴上几滴水，使溶再次稳定后才析出下一次的晶体</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#concentration">浓度问题</a></li>
+                <li><a href="#supersaturation">过饱和溶液</a></li>
+                <li><a href="#stability">溶液稳定性</a></li>
+                <li><a href="#optimization">实验优化</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 100;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
