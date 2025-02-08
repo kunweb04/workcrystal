@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 晶体摄影篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        h3 {
+            color: var(--primary);
+            margin: 1.5em 0 1em;
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            margin: 2em 0;
+        }
+
+        .step-item {
+            position: relative;
+            padding: 1.2em 0 1.2em 3.5em;
+            margin: 1.5em 0;
+            border-left: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            border-left-color: var(--secondary);
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -1.2em;
+            top: 1em;
+            width: 2.4em;
+            height: 2.4em;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(42,92,132,0.2);
+        }
+
+        .note {
+            background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #FFC107;
+            margin: 2em 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .content-image {
+            width: 80%;
+            margin: 1.5em auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+            .step-item {
+                padding-left: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">晶体摄影篇</span></h1>
+
+            <section id="preface">
+                <h2>一、前情提要</h2>
+                <div class="method-card">
+                    <p>本教程详细介绍如何使用手机进行晶体摄影，重点讲解小米手机的专业模式操作及应用。对于苹果手机，也可借助 Halide、ProCam 等第三方软件实现类似功能。内容来源于冰冰、蜉蝣I君、紫色硫酸铜、mo（有改动）</p>
+                </div>
+            </section>
+
+            <section id="guide">
+                <h2>二、手机操作指南</h2>
+                <div class="method-card">
+                    <h3>2.1 启用专业模式</h3>
+                    <p>首先，在相机中找到并切换专业模式。以小米手机为例，操作路径如下：<br>相机/设置/自定义相机/功能布局/专业</p>
+                    
+                    <h3>2.2 启用专业模式后的参数设置</h3>
+                    <p>打开专业模式后应出现以下参数：</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">wb (白平衡)</div>
+                            <div class="step-detail">调节冷暖色调，数值越大，色调偏暖，反之则偏冷。根据个人喜好，您可以调节为暖色调以突出复古感，或冷色调以强调科技感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">f (焦距)</div>
+                            <div class="step-detail">焦距参数越小，镜头对焦距离越近；越大，焦距越远。确保对焦清晰即可。如果需要帮助，可以启用峰值对焦辅助功能</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">s (曝光时长)</div>
+                            <div class="step-detail">曝光时长决定了拍摄时感光元件的曝光时间。曝光时间越短，照片越暗；越长，照片越亮。注意，曝光时间过长时，任何震动或移动都会导致模糊，因此建议在强光下拍摄，并尽量缩短曝光时长以确保清晰。如果使用的灯光频率与曝光时长相同，可能会出现干涉纹理，影响图像质量，此时可以适当增加曝光时长</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">iso (感光度)</div>
+                            <div class="step-detail">与曝光时长类似，iso控制图像的亮度。iso值越高，图像亮度越高，但可能引入噪点。建议在光线充足时，保持iso值较低，以减少噪点的出现</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">ev (曝光补偿)</div>
+                            <div class="step-detail">调整曝光量</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">lens (镜头选择)</div>
+                            <div class="step-detail">切换多镜头手机的不同镜头</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="shooting">
+                <h2>三、拍摄角度与物体摆放</h2>
+                <div class="method-card">
+                    <h3>3.1 拍摄技巧</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">水平拍摄</div>
+                            <div class="step-detail">将拍摄物放置在纸上，在自然光下让手机和拍摄物处于同一水平线拍摄</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">较高物品</div>
+                            <div class="step-detail">建议使用仰视或俯视的角度拍摄，以突出物体的立体感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">小物品</div>
+                            <div class="step-detail">可使物体置入镜头中央以突出主体（可打开三分线做辅助定位）</div>
+                        </li>
+                    </ul>
+
+                    <h3>3.2 常见的构图方式</h3>
+                    <p>常见的构图类型有：填充构图、框架构图、对角线构图、黄金分割构图、引导线构图、对称构图和三分法构图。由于篇幅原因，在此仅特别介绍三分法构图</p>
+
+                    <h3>3.3 三分法构图（推荐）</h3>
+                    <p>三分法，又称井字构图或九宫格构图，是将画面分成九个小块的构图方法，具体做法是将两条横线和两条竖线交织在画面中，形成三个区域。可以将拍摄主体放置在这些交点上，使得构图更为平衡和自然</p>
+                    <img src="冰冰01.png" class="content-image" alt="三分法构图示例">
+                    <p style="text-align:center;color:var(--secondary)">图源：冰冰</p>
+                    <img src="冰冰02.png" class="content-image" alt="三分法构图示例">
+                    <p style="text-align:center;color:var(--secondary)">图源：冰冰</p>
+                </div>
+            </section>
+
+            <section id="background">
+                <h2>四、拍摄背景</h2>
+                <div class="method-card">
+                    <p>背景的选择影响晶体的透明度和层次感。这里依据个人喜好选择即可</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">磨砂背景</div>
+                            <div class="step-detail">柔和反光，增强晶体质感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">镜面背景</div>
+                            <div class="step-detail">可形成倒影，提高艺术感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">书本背景</div>
+                            <div class="step-detail">印刷文字可展现晶体的透明度，并增加景深</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">干花、桌布、细沙</div>
+                            <div class="step-detail">增强画面氛围，适合创意摄影</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="lighting">
+                <h2>五、拍摄光源</h2>
+                <div class="method-card">
+                    <h3>5.1 自然光</h3>
+                    <p>自然光（太阳光）是晶体摄影的理想光源</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">最佳拍摄时间</div>
+                            <div class="step-detail">建议选择午后，光线充足但较柔和</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">利用窗户光线</div>
+                            <div class="step-detail">可在窗台拍摄，若光照过强，可用窗帘进行柔化</div>
+                        </li>
+                    </ul>
+
+                    <h3>5.2 人造光</h3>
+                    <p>当自然光不足时，可使用人造光源，如摄影补光灯、外接闪光灯、手电筒等</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">逆光</div>
+                            <div class="step-detail">让光源从晶体背后照射，增强晶莹剔透的质感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">侧逆光</div>
+                            <div class="step-detail">从侧后方照射，使晶体轮廓更加立体，提高空间感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">柔光技巧</div>
+                            <div class="step-detail">若手电筒光源过强，可用纸巾遮挡，使光线更柔和</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="equipment">
+                <h2>六、提升拍摄质量的设备推荐</h2>
+                <div class="method-card">
+                    <h3>6.1 外置微距镜头</h3>
+                    <p>手机微距拍摄通常受限，推荐使用微距外接镜头，如 Apexel 10x/15x，提升细节表现力</p>
+
+                    <h3>6.2 三脚架与稳定设备</h3>
+                    <p>避免手持拍摄的抖动问题，建议使用 Ulanzi MT-08 或者桌面小型三脚架，提高曝光稳定性</p>
+
+                    <h3>6.3 偏振镜（CPL）</h3>
+                    <p>可减少玻璃表面反光，增强晶体对比度，使内部结构更清晰</p>
+
+                    <h3>6.4 RAW 格式拍摄</h3>
+                    <p>部分手机支持 RAW 拍摄模式（如 iPhone、三星、小米高端机型），便于后期处理降噪、调整曝光等</p>
+                </div>
+            </section>
+
+            <section id="post-processing">
+                <h2>七、后期处理</h2>
+                <div class="method-card">
+                    <h3>7.1 图片合成（叠图）</h3>
+                    <p>当拍摄物体较大，微距无法完整对焦时，可以尝试使用Photoshop叠图的方式进行合成。这样可以确保拍摄物体的各个部分都能保持清晰</p>
+
+                    <h3>7.2 去除噪点</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">软件降噪</div>
+                            <div class="step-detail">可以使用Lightroom或Snapseed的降噪功能，降低高ISO带来的颗粒感</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">长曝光降噪</div>
+                            <div class="step-detail">部分手机或相机有“长曝光降噪”选项，可减少长时间曝光带来的热噪点</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">RAW格式拍摄</div>
+                            <div class="step-detail">如果手机支持RAW格式，后期处理时可以更精准地降噪和调整曝光</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="recommendation">
+                <h2>八、大佬设备推荐</h2>
+                <div class="method-card">
+                    <h3>高像素相机</h3>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-title">性价比推荐</div>
+                            <div class="step-detail">Sony a7r2</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">性能推荐</div>
+                            <div class="step-detail">Sony a7r5</div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-title">资金充裕推荐</div>
+                            <div class="step-detail">哈苏X2D、富士gfx</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#preface">前情提要</a></li>
+                <li><a href="#guide">操作指南</a></li>
+                <li><a href="#shooting">拍摄角度</a></li>
+                <li><a href="#background">拍摄背景</a></li>
+                <li><a href="#lighting">拍摄光源</a></li>
+                <li><a href="#equipment">设备推荐</a></li>
+                <li><a href="#post-processing">后期处理</a></li>
+                <li><a href="#recommendation">设备推荐</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
