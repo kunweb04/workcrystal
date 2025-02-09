@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 晶体图书馆</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* 导航样式 */
+        .nav {
+            top: 40px;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* 图书馆网格布局 */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2em;
+        }
+
+        /* 文件卡片 */
+        .doc-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(93,168,179,0.1);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+
+        .doc-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .doc-meta {
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .doc-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(93,168,179,0.1);
+        }
+
+        /* 搜索栏 */
+        .search-box {
+            margin: 2rem 0;
+            max-width: 600px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(93,168,179,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .library-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">图书馆中心</span></h1>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索文献标题、作者或关键词...">
+            </div>
+        </nav>
+
+        <div class="library-grid">
+            <article class="doc-card">
+                <h3>杂环化学（原书第四版）</h3>
+                <div class="doc-meta">
+                    <p>作者：[英]J.A.焦耳 K.米尔斯</p>
+                    <p>出版年份：-</p>
+                    <p>文件格式：PDF</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="杂环化学__(原书第四版).pdf" class="btn btn-primary">在线查看</a>
+                    <a href="杂环化学__(原书第四版).pdf" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+            <article class="doc-card">
+                <h3>杂环化学(结构反应与应用)</h3>
+                <div class="doc-meta">
+                    <p>作者：[德]T.艾歇尔 S.豪普特曼</p>
+                    <p>出版年份：-</p>
+                    <p>文件格式：pdf</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="杂环化学(结构反应与应用).pdf" class="btn btn-primary">在线查看</a>
+                    <a href="杂环化学(结构反应与应用).pdf" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+            <article class="doc-card">
+                <h3>原子簇结构划分</h3>
+                <div class="doc-meta">
+                    <p>作者：W 利普斯科姆</p>
+                    <p>出版年份：-</p>
+                    <p>文件格式：pdf</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="原子簇结构划分.pdf" class="btn btn-primary">在线查看</a>
+                    <a href="原子簇结构划分.pdf" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+            <article class="doc-card">
+                <h3>现代晶体学.第一卷，晶体学基础</h3>
+                <div class="doc-meta">
+                    <p>作者：B·K·伐因斯坦</p>
+                    <p>出版年份：2011年</p>
+                    <p>文件格式：pdf</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="现代晶体学.第一卷，晶体学基础 (B·K·伐因斯坦) (Z-Library).pdf" class="btn btn-primary">在线查看</a>
+                    <a href="现代晶体学.第一卷，晶体学基础 (B·K·伐因斯坦) (Z-Library).pdf" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+            <article class="doc-card">
+                <h3>溶解度表 GV11</h3>
+                <div class="doc-meta">
+                    <p>作者：未知</p>
+                    <p>出版年份：-</p>
+                    <p>文件格式：xis</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="#" class="btn btn-primary">在线查看</a>
+                    <a href="溶解度表 GV11.xls" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+            <article class="doc-card">
+                <h3>溶解度表(700种金属盐)</h3>
+                <div class="doc-meta">
+                    <p>作者：未知</p>
+                    <p>出版年份：-</p>
+                    <p>文件格式：xis</p>
+                </div>
+                <div class="doc-actions">
+                    <a href="#" class="btn btn-primary">在线查看</a>
+                    <a href="溶解度表(700种金属盐).xls" class="btn btn-outline">下载文件</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <script>
+        // 实现搜索功能
+        const searchInput = document.querySelector('.search-input');
+        const docCards = document.querySelectorAll('.doc-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            docCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
