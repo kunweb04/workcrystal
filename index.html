@@ -667,6 +667,18 @@
         </div>
     </div>
 
+    <div class="update-popup">
+        <div class="popup-content">
+            <h3>📢 站主祝福</h3>
+            <div class="update-list">
+                <div class="update-item">
+                    <span>祝大家养晶必出大饼，出饼RLCZ，重做继续出饼~hiahiahia</span>
+                </div>
+            </div>
+            <button class="close-popup">×</button>
+        </div>
+    </div>
+
     <script>
         // 交互功能
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -702,43 +714,65 @@
             });
         });
 
-        // 本地存储控制
-        function shouldShowPopup() {
-            const lastShown = localStorage.getItem('popupLastShown');
-            const today = new Date().toDateString();
-            return !lastShown || lastShown !== today;
-        }
+        const currentAnnouncementVersion = 'v2025-02-10-v1';
 
-        function setPopupShown() {
-            localStorage.setItem('popupLastShown', new Date().toDateString());
-        }
+    function getTodayDate() {
+        const today = new Date();
+        return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    }
 
-        // 显示弹窗
-        function showUpdatePopup() {
-            if (shouldShowPopup()) {
-                const popup = document.querySelector('.update-popup');
+    function shouldShowPopup() {
+        const storedData = localStorage.getItem('announcementData');
+        if (!storedData) return true;
+        
+        try {
+            const { version, date } = JSON.parse(storedData);
+            
+            // 版本号不匹配时必定显示
+            if (version !== currentAnnouncementVersion) return true;
+            
+            // 版本号匹配但日期不是今天时显示
+            return date !== getTodayDate();
+        } catch {
+            return true;
+        }
+    }
+
+    function setPopupShown() {
+        const data = {
+            version: currentAnnouncementVersion,
+            date: getTodayDate()
+        };
+        localStorage.setItem('announcementData', JSON.stringify(data));
+    }
+
+    // 显示所有公告弹窗
+    function showUpdatePopups() {
+        if (shouldShowPopup()) {
+            document.querySelectorAll('.update-popup').forEach(popup => {
                 popup.classList.add('show');
-                setPopupShown();
-            }
+            });
+            setPopupShown();
         }
+    }
 
-        // 初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            // 延迟1秒显示
-            setTimeout(showUpdatePopup, 1000);
+    // 初始化（保持原有的事件监听代码不变）
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(showUpdatePopups, 1000);
 
-            // 关闭按钮
-            document.querySelector('.close-popup').addEventListener('click', () => {
-                document.querySelector('.update-popup').classList.remove('show');
+        document.querySelectorAll('.close-popup').forEach(button => {
+            button.addEventListener('click', () => {
+                const popup = button.closest('.update-popup');
+                popup?.classList.remove('show');
             });
         });
 
-        // 点击外部关闭
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('update-popup')) {
-                document.querySelector('.update-popup').classList.remove('show');
+                e.target.classList.remove('show');
             }
         });
+    });
     </script>
 </body>
 </html>
