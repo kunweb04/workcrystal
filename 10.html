@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 磷酸二氢钾篇</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 60px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav h3 {
+            color: var(--primary);
+            margin-bottom: 1em;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .nav h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            transition: var(--transition);
+            display: block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(93,168,179,0.1);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-left: 5%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2.5em 0 1.2em;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .method-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .chemical-formula {
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            margin: 1em 0;
+            padding: 1em;
+            background: rgba(93,168,179,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        sub {
+            color: #5DA8B3;
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+            .nav {
+                position: static;
+                margin: 0 0 40px;
+                padding: 20px;
+            }
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">磷酸二氢钾篇</span></h1>
+
+            <section id="basic">
+                <h2>一、基础认识</h2>
+                <div class="method-card">
+                    <h3>1.1 化学特性</h3>
+                    <p class="chemical-formula">化学式：KH<sub>2</sub>PO<sub>4</sub></p>
+                    <ul>
+                        <li>别名：磷酸一钾、KDP（Kalium dihydrogen phosphate）</li>
+                        <li>外观：无色四方晶系结晶或白色结晶粉末</li>
+                        <li>溶解性：易溶于水，不溶于乙醇</li>
+                        <li>安全性：低毒性（健康危害等级1）</li>
+                        <li>溶液性质：1%溶液pH值为4.6，呈酸性</li>
+                        <li>热稳定性：400°C熔化为透明液体，冷却后固化为玻璃状偏磷酸钾</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="usage">
+                <h2>二、主要用途</h2>
+                <div class="method-card">
+                    <h3>2.1 多领域应用</h3>
+                    <ul>
+                        <li><strong>农业领域：</strong>高效磷钾复合肥，适用于经济作物、粮食、果蔬等</li>
+                        <li><strong>食品工业：</strong>烘焙添加剂、营养调味剂</li>
+                        <li><strong>化学工业：</strong>生产焦磷酸钾及其他钾盐的原料</li>
+                        <li><strong>光学领域：</strong>作为倍频材料用于激光技术</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <nav class="nav">
+            <h3>内容导航</h3>
+            <ul>
+                <li><a href="#basic">基础认识</a></li>
+                <li><a href="#usage">主要用途</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 100;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
