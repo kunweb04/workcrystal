@@ -356,6 +356,99 @@
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
         }
 
+        .update-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(42,92,132,0.15);
+            z-index: 9999;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent);
+        }
+
+        .update-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            position: relative;
+        }
+
+        .update-popup h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .update-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .update-item {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: rgba(196,212,224,0.1);
+        }
+
+        .update-item time {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            flex: 0 0 80px;
+        }
+
+        .update-item a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .update-item a:hover {
+            color: var(--secondary);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .close-popup:hover {
+            transform: rotate(90deg);
+            background: var(--primary);
+        }
+
+        @media (max-width: 480px) {
+            .update-popup {
+                width: 90%;
+                padding: 1.5rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -532,6 +625,20 @@
                     </div>
                 </article>
 
+                <article class="card">
+                    <img src="team.png" alt="" loading="lazy">
+                    <div class="card-content">
+                        <div>
+                            <h3>鸣谢</h3>
+                            <p class="card-meta">感谢大佬 · 提供支援</p>
+                        </div>
+                        <p>本指南的诞生离不开众多领域专家，因此特谢</p>
+                        <div class="card-footer">
+                            <a href="09.html">前往阅读</a>
+                        </div>
+                    </div>
+                </article>
+
             </div>
 
             <div class="section-divider"></div>
@@ -541,6 +648,23 @@
             声明：本站内容主要让新人快速入门，日后有时间再制作详细补充<br>
             本站作者：麒麟（kun）
         </footer>
+    </div>
+
+    <div class="update-popup">
+        <div class="popup-content">
+            <h3>📢 更新公告</h3>
+            <div class="update-list">
+                <div class="update-item">
+                    <time>2024-02-10</time>
+                    <span>新增鸣谢栏位</span>
+                </div>
+                <div class="update-item">
+                    <time>2024-02-11</time>
+                    <span>摆烂一天</span>
+                </div>
+            </div>
+            <button class="close-popup">×</button>
+        </div>
     </div>
 
     <script>
@@ -576,6 +700,44 @@
                 img.style.opacity = 1;
                 img.style.transition = 'opacity 0.6s ease';
             });
+        });
+
+        // 本地存储控制
+        function shouldShowPopup() {
+            const lastShown = localStorage.getItem('popupLastShown');
+            const today = new Date().toDateString();
+            return !lastShown || lastShown !== today;
+        }
+
+        function setPopupShown() {
+            localStorage.setItem('popupLastShown', new Date().toDateString());
+        }
+
+        // 显示弹窗
+        function showUpdatePopup() {
+            if (shouldShowPopup()) {
+                const popup = document.querySelector('.update-popup');
+                popup.classList.add('show');
+                setPopupShown();
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 延迟1秒显示
+            setTimeout(showUpdatePopup, 1000);
+
+            // 关闭按钮
+            document.querySelector('.close-popup').addEventListener('click', () => {
+                document.querySelector('.update-popup').classList.remove('show');
+            });
+        });
+
+        // 点击外部关闭
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('update-popup')) {
+                document.querySelector('.update-popup').classList.remove('show');
+            }
         });
     </script>
 </body>

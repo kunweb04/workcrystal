@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 特别鸣谢</title>
+    <style>
+        :root {
+            --primary: #2A5C84;
+            --secondary: #5DA8B3;
+            --accent: #C4D4E0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* 特别鸣谢卡片 */
+        .honor-card {
+            background: #f9fbfd;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2em 0;
+            border: 1px solid rgba(93,168,179,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .honor-card::before {
+            content: "🎉";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 6rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .contributor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 2em;
+        }
+
+        .contributor-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .contributor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 1em;
+        }
+
+        .special-thanks {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(15deg, rgba(42,92,132,0.05) 0%, rgba(93,168,179,0.05) 100%);
+            border-radius: 16px;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .special-thanks::after {
+            content: "✨";
+            position: absolute;
+            font-size: 2rem;
+            right: 20px;
+            bottom: 10px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .content {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">特别鸣谢</span></h1>
+
+            <div class="honor-card">
+                <h2>致谢声明</h2>
+                <p>本指南的诞生离不开众多晶体化学领域专家、爱好者及科研工作者的鼎力支持。特别感谢以下专业人士无私分享宝贵经验、实验数据及精美作品图片，他们的贡献使晶体科学之美得以更生动地展现</p>
+            </div>
+
+            <div class="special-thanks">
+                <h3>核心贡献者</h3>
+                <p>特别致谢以下专家为指南提供了系统性支持与专业指导</p>
+            </div>
+
+            <div class="contributor-grid">
+                <div class="contributor-card">
+                    <div class="badge">首席顾问</div>
+                    <h3>紫色硫酸铜</h3>
+                    <p>
+                    • 提供"滴水法"结晶稳定技术<br>
+                    • 撰写相关经验专文并提供高清图片支持<br>
+                    • 参与各章节内容审校，确保专业性</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">摄影指导</div>
+                    <h3>冰冰</h3>
+                    <p>• 开发手机摄影标准化流程，优化晶体拍摄效果<br>
+                    • 提供三分法构图原创教学素材，提高影像质量<br>
+                    • 参与摄影章节的内容架构设计</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">实验专家</div>
+                    <h3>迷路的野指针</h3>
+                    <p>• 提供丰富的晶体生长实验数据及对比分析<br>
+                    • 分享大量晶体生长过程的图文资料<br>
+                    • 组织并参与相关学术交流与讨论</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">研究支持</div>
+                    <h3>长街听风</h3>
+                    <p>• 搭建专业人士交流网络，提供行业资源对接<br>
+                    • 整理并分享大量专业文献与研究经验<br>
+                    • 提供专业指导建议</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">摄影后期咨讯</div>
+                    <h3>浅梦新河</h3>
+                    <p>• 指导晶体摄影后期处理，优化影像呈现 <br>
+                    • 指导于彩色晶体的培养与拍摄技术<br>
+                    • 曾活跃于相关论坛，贡献珍贵经验</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">资料整理</div>
+                    <h3>渡鸦</h3>
+                    <p>• 收集并整理大量晶体化学相关信息 <br>
+                    • 寻找到大量相关贴文并分享<br>
+                    • 参与相关内容整理</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">内容优化</div>
+                    <h3>mo</h3>
+                    <p>• 提供针对性修改建议，提升文本质量 <br>
+                    • 分享丰富的文献与研究经验<br>
+                    • 参与章节审校</p>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="badge">帅逼站主</div>
+                    <h3>冰麒麟001</h3>
+                    <p>• 提供0%专文经验 <br>
+                    • 提供0%专文图片<br>
+                    • 提升网站颜值水平</p>
+                </div>
+            </div>
+
+            <div class="honor-card" style="margin-top:4rem; text-align:center;">
+                <h2>特别鸣谢</h2>
+                <p>不明就里的乙酸铜，蜉蝣，泠鳞，阿贝少，westleaf</p>
+                <p>感谢超过百位晶体化学领域的爱好者，他们在实验探索、数据分享、摄影记录及知识交流等方面提供了宝贵支持，促使本指南更加完善</p>
+                <a href="index.html" style="display:inline-block; margin-top:1.5rem; padding:12px 24px; background:var(--primary); color:white; border-radius:8px; text-decoration:none;">返回首页</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
