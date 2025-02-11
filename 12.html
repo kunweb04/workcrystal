@@ -1,0 +1,68 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>晶体化学指南 - 硫酸锰篇</title>
+    <link rel="stylesheet" href="styles.css">
+    <body>
+        <div class="container">
+            <main class="content">
+                <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">磷酸二氢钾篇</span></h1>
+    
+                <section id="basic">
+                    <h2>一、基础认识</h2>
+                    <div class="method-card">
+                        <h3>1.1 化学特性</h3>
+                        <p class="chemical-formula">化学式：KH<sub>2</sub>PO<sub>4</sub></p>
+                        <ul>
+                            <li>别名：磷酸一钾、KDP（Kalium dihydrogen phosphate）</li>
+                            <li>外观：无色四方晶系结晶或白色结晶粉末</li>
+                            <li>溶解性：易溶于水，不溶于乙醇</li>
+                            <li>安全性：低毒性（健康危害等级1）</li>
+                            <li>溶液性质：1%溶液pH值为4.6，呈酸性</li>
+                            <li>热稳定性：400°C熔化为透明液体，冷却后固化为玻璃状偏磷酸钾</li>
+                        </ul>
+                    </div>
+                </section>
+    
+                <section id="usage">
+                    <h2>二、主要用途</h2>
+                    <div class="method-card">
+                        <h3>2.1 多领域应用</h3>
+                        <ul>
+                            <li><strong>农业领域：</strong>高效磷钾复合肥，适用于经济作物、粮食、果蔬等</li>
+                            <li><strong>食品工业：</strong>烘焙添加剂、营养调味剂</li>
+                            <li><strong>化学工业：</strong>生产焦磷酸钾及其他钾盐的原料</li>
+                            <li><strong>光学领域：</strong>作为倍频材料用于激光技术</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+    
+            <nav class="nav">
+                <h3>内容导航</h3>
+                <ul>
+                    <li><a href="#basic">基础认识</a></li>
+                    <li><a href="#usage">主要用途</a></li>
+                    <li><a href="index.html">返回首页</a></li>
+                </ul>
+            </nav>
+        </div>
+    
+        <script>
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const offset = 100;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>
+</head>

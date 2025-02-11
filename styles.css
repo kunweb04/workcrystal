@@ -1,0 +1,186 @@
+:root {
+    --primary: #2A5C84;
+    --secondary: #5DA8B3;
+    --accent: #C4D4E0;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 60px;
+}
+
+.warning {
+    background: linear-gradient(15deg, #ffebee 0%, #ffe5e9 100%);
+    padding: 1.5rem;
+    border-left: 4px solid #F44336;
+    margin: 2em 0;
+    border-radius: 8px;
+    position: relative;
+}
+
+.warning::before {
+    content: '⚠️';
+    position: absolute;
+    left: -1.2em;
+    top: -1em;
+    font-size: 1.8em;
+    background: white;
+    border-radius: 50%;
+    padding: 0.2em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav {
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    backdrop-filter: blur(8px);
+}
+
+.nav h3 {
+    color: var(--primary);
+    margin-bottom: 1em;
+    padding-left: 12px;
+    position: relative;
+}
+
+.nav h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--secondary);
+    border-radius: 2px;
+}
+
+.nav ul {
+    list-style: none;
+}
+
+.nav li {
+    margin: 12px 0;
+    position: relative;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #666;
+    transition: var(--transition);
+    display: block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+.nav a:hover {
+    background: rgba(93,168,179,0.1);
+    color: var(--primary);
+    border-color: var(--accent);
+}
+
+.content {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+    margin-left: 5%;
+    position: relative;
+}
+
+h1 {
+    font-size: 2.8rem;
+    color: var(--primary);
+    margin-bottom: 1.2em;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--secondary);
+}
+
+h2 {
+    color: var(--primary);
+    margin: 2.5em 0 1.2em;
+    padding-left: 1rem;
+    border-left: 4px solid var(--secondary);
+}
+
+.method-card {
+    background: #f9fbfd;
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 2.5em 0;
+    border: 1px solid rgba(93,168,179,0.2);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+
+.chemical-formula {
+    font-family: 'Courier New', monospace;
+    color: var(--primary);
+    margin: 1em 0;
+    padding: 1em;
+    background: rgba(93,168,179,0.1);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+sub {
+    color: #5DA8B3;
+    font-size: 0.8em;
+}
+
+.note {
+    background: linear-gradient(15deg, #fff9e6 0%, #fff4d9 100%);
+    padding: 1.5rem;
+    border-left: 4px solid #FFC107;
+    margin: 2em 0;
+    border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 30px;
+    }
+    .nav {
+        position: static;
+        margin: 0 0 40px;
+        padding: 20px;
+    }
+    .content {
+        margin-left: 0;
+        padding: 30px;
+    }
+}
