@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="boZb7a_CJtIxYujhyRGgdcNkRtGZL4oc2efjgBe_5ME" />
     <link rel="icon" href="icon.png" type="image/png">
     <title>晶体培养指南</title>
@@ -9,91 +10,311 @@
         :root {
             --primary: #2A5C84;
             --secondary: #5DA8B3;
-            --accent: #C4D4E0;
+            --accent: #bfdbfe;
+            --background: #f8fafc;
+            --surface: rgba(255,255,255,0.9);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --radius-3xl: 1.5rem;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        @supports (font-variation-settings: normal) {
+            * { font-family: 'Inter var', system-ui; }
         }
 
         body {
-            background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
+            background: var(--background);
+            color: #1e293b;
             line-height: 1.6;
-            color: #333;
         }
 
-        .container {
+        /* 导航栏 */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(42,92,132,0.1);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header.scrolled {
+            height: 60px;
+            background: rgba(255,255,255,0.98);
+        }
+
+        .nav-container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .hero {
-            background: linear-gradient(135deg, 
-                rgba(42,92,132,0.95) 0%, 
-                rgba(93,168,179,0.95) 100%),
-                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%232A5C84" /><path d="M50 0L100 50L50 100L0 50Z" fill="%235DA8B3" opacity="0.2"/></svg>');
-            padding: 6rem 2rem;
-            border-radius: 24px;
-            margin: 2rem 0;
-            text-align: center;
-            color: white;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2A5C84;
+            text-decoration: none;
             position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #5DA8B3;
+            transform: scaleX(0);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2A5C84;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #5DA8B3;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* 移动端菜单 */
+        .menu-toggle {
+            display: none ;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 1rem;
+            z-index: 1001; 
+            position: relative; 
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 2px;
+            background: #2A5C84;
+            position: relative;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger::before { top: -8px; }
+        .hamburger::after { top: 8px; }
+
+        /* 主容器 */
+        .container {
+            max-width: 1440px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        /* 新版英雄区 */
+        .hero-section {
+            position: relative;
+            padding: 8rem 0;
+            border-radius: var(--radius-3xl);
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(42,92,132,0.1);
+            margin-bottom: 4rem;
+            isolation: isolate;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, 
-                rgba(255,255,255,0.1) 0%, 
-                transparent 70%);
-            animation: glow 8s infinite linear;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 40px;
-            background: linear-gradient(180deg, 
-                rgba(255,255,255,0.3) 0%, 
-                transparent 100%);
-            filter: blur(10px);
-            z-index: -1;
-        }
-
-        @keyframes glow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 1.8;
-            opacity: 0.9;
+            color: white;
         }
 
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, 
+                rgba(37, 99, 235, 0.9) 0%,
+                rgba(125, 211, 252, 0.7) 100%),
+                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%232563eb" /><path d="M50 0L100 50L50 100L0 50Z" fill="%237dd3fc" opacity="0.2"/></svg>');
+            filter: saturate(180%);
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, 
+                rgba(255,255,255,0.15) 0%, 
+                transparent 60%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-flow: dense;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-3xl);
+            padding: 1.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, 
+                rgba(125,211,252,0.1) 0%,
+                transparent 50%);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            transition: transform var(--transition);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.03);
+        }
+
+        .card-category {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .card-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: flex-end; 
+            align-items: center;
+            gap: 1rem; 
+        }
+
+        .card-author {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: auto;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .card-link:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* 专题区块 */
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, 
@@ -136,213 +357,6 @@
             background: linear-gradient(90deg, 
                 var(--accent) 0%, 
                 transparent 100%);
-        }
-
-        /* 卡片系统 */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-flow: dense;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .card:hover {
-            transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
-            box-shadow: 0 12px 40px rgba(42,92,132,0.15);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, 
-                rgba(93,168,179,0.1) 0%, 
-                transparent 50%);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--accent);
-            transition: var(--transition);
-        }
-
-        .card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.8rem;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            min-height: 240px;
-        }
-
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .card h3::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--secondary);
-            border-radius: 50%;
-        }
-
-        .card p {
-            color: #666;
-            line-height: 1.7;
-            margin-bottom: 1.2rem;
-        }
-
-        .card-footer {
-            border-top: 1px solid rgba(93,168,179,0.1);
-            padding-top: 1.2rem;
-            margin-top: auto;
-        }
-
-        .card a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.8rem 1.6rem;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card a::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, 
-                transparent 25%,
-                rgba(255,255,255,0.2) 50%,
-                transparent 75%);
-            animation: buttonGlow 3s infinite linear;
-        }
-
-        .card a:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        .card a[disabled] {
-            background: #e0e0e0;
-            color: #9e9e9e;
-            cursor: not-allowed;
-            position: relative;
-        }
-
-        .card a[disabled]::after {
-            content: "即将上线";
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--secondary);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-
-        @keyframes buttonGlow {
-            0% { transform: translateX(-50%) rotate(45deg); }
-            100% { transform: translateX(50%) rotate(45deg); }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .hero {
-                padding: 4rem 1rem;
-                border-radius: 12px;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .card {
-                margin: 0 0.5rem;
-            }
-            
-            .card img {
-                height: 180px;
-            }
-
-            .section-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr; 
-            }
-
-            .section-title::before,
-            .section-title::after {
-                width: 100%;
-            }
-        }
-
-        .image-container {
-            position: relative;
-            overflow: hidden; 
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--accent);
-            transition: var(--transition);
-        }
-
-        .author-name {
-            position: absolute;
-            left: 1px; 
-            bottom: 10px;
-            color: white; 
-            background-color: rgba(0, 0, 0, 0.5); 
-            padding: 4px 8px; 
-            border-radius: 4px; 
-            font-size: 0.9rem; 
-            z-index: 1; 
         }
 
         .site-footer {
@@ -449,204 +463,266 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .hamburger {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: #2A5C84;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger::before,
+            .hamburger::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background: inherit;
+                transition: all 0.3s ease;
+                left: 0;
+            }
+
+            .hamburger::before {
+                top: -8px;
+            }
+
+            .hamburger::after {
+                top: 8px;
+            }
+
+            /* 激活状态 */
+            .hamburger.active {
+                background: transparent;
+            }
+
+            .hamburger.active::before {
+                transform: rotate(45deg);
+                top: 0;
+            }
+
+            .hamburger.active::after {
+                transform: rotate(-45deg);
+                top: 0;
+            }
+
+            /* 侧边栏样式 */
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 30%;
+                height: calc(100vh - 60px);
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                transition: transform 0.3s ease;
+                box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+                transform: translateX(0);
+            }
+
+        .container {
+                padding: 0 1rem;
+                margin-top: 4rem;
+            }
+
+            .nav-links {
+                display: flex; 
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+    }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap&text=←→">
 </head>
 <body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">CrystalLab</a>
+            <button class="menu-toggle">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-links">
+                <a href="w1.html" class="nav-link">培养指南</a>
+                <a href="07.html" class="nav-link">作品展示</a>
+                <a href="09.html" class="nav-link">特别鸣谢</a>
+                <a href="002.html" class="nav-link">联系投稿</a>
+            </div>
+        </nav>
+    </header>
+
     <div class="container">
-        <main class="content">
-            <section class="hero">
-                <h1>晶体培养指南</h1>
-                <p>
-                    学习晶体化学知识，从基础结晶到培养技术<br>
-                    新人向内容，一些我的见解
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">探索晶体之美</h1>
+                <p class="hero-subtitle">
+                    从基础原理到进阶技巧，开启你的晶体培养之旅<br>
+                    一起探索晶体的奇妙世界
                 </p>
-            </section>
-
-            <div class="section-title">
-                <h2>须知</h2>
             </div>
-            <div class="card-grid">
-                <article class="card">
-                    <img src="crystal00_1.png" alt="安全与操作" loading="lazy">
-                    <div class="card-content">
-                        <div>
-                            <h3>安全与操作规范</h3>
-                            <p class="card-meta">新人必读 · 定期回看</p>
-                        </div>
-                        <p>每一个人在制作晶体前都需要了解的重要知识</p>
-                        <div class="card-footer">
-                            <a href="001.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
+        </section>
 
-                <article class="card">
-                    <div class="image-container">
-                    <img src="westleaf01.png" alt="投稿" loading="lazy">
-                    <div class="author-name">图源：westleaf</div> 
+        <div class="section-header" id="basics">
+            <h2 class="section-title">须知</h2>
+        </div>
+
+        <div class="card-grid">
+            <article class="card">
+                <img src="crystal00_1.png" class="card-image" alt="安全与操作">
+                <span class="card-category">安全与操作规范</span>
+                <h3 class="card-title">新人必读 · 定期回看</h3>
+                <p class="card-description">每个人在制作晶体前都需要了解的重要知识</p>
+                <div class="card-footer">
+                    <a href="001.html" class="card-link">阅读全文 →</a>
                 </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>投稿与建议</h3>
-                            <p class="card-meta">给与建议 · 投稿内容</p>
-                        </div>
-                        <p>欢迎投稿作品于此或投稿纠正本站内容</p>
-                        <div class="card-footer">
-                            <a href="002.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
+            </article>
 
-                <article class="card">
-                    <div class="image-container">
-                    <img src="迷路的野指针.png" alt="作品" loading="lazy">
-                    <div class="author-name">图源：迷路的野指针</div> 
+            <article class="card">
+                <img src="westleaf01.png" class="card-image" alt="投稿">
+                <span class="card-category">投稿与建议</span>
+                <h3 class="card-title">给与建议 · 投稿内容</h3>
+                <p class="card-description">欢迎投稿作品于此或投稿纠正本站内容</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 westleaf</span>
+                    <a href="002.html" class="card-link">前去投稿 →</a>
                 </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>大佬作品集</h3>
-                            <p class="card-meta">匠心独运 · 结晶之美</p>
-                        </div>
-                        <p>精选大佬们的匠心之作，每一颗晶体都凝聚着独特的艺术与科学之美</p>
-                        <div class="card-footer">
-                            <a href="07.html">查看作品 →</a>
-                        </div>
-                    </div>
-                </article>
+            </article>
 
+            <article class="card">
+                <img src="迷路的野指针.png" class="card-image" alt="作品">
+                <span class="card-category">大佬作品集</span>
+                <h3 class="card-title">匠心独运 · 结晶之美</h3>
+                <p class="card-description">精选大佬们的匠心之作</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 迷路的野指针</span>
+                    <a href="07.html" class="card-link">前往观赏 →</a>
+                </div>
+            </article>
+        </div>
+
+        <div class="section-header" id="techniques">
+            <h2 class="section-title">晶体专题</h2>
+        </div>
+
+        <div class="card-grid">
+            <article class="card">
+                <img src="indexc2_01.png" class="card-image" alt="结晶方式">
+                <span class="card-category">结晶方式</span>
+                <h3 class="card-title">基础方法 · 操作指南</h3>
+                <p class="card-description">掌握基础结晶原理，了解溶液配置与操作注意事项</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 LX虫管吖Galvin</span>
+                    <a href="01.html" class="card-link">阅读全文 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="indexc2_02.png" class="card-image" alt="晶体培养">
+                <span class="card-category">培养晶体</span>
+                <h3 class="card-title">单晶培养 · 溶液控制</h3>
+                <p class="card-description">欢迎投稿作品于此或投稿纠正本站内容</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 紫色硫酸铜</span>
+                    <a href="w1.html" class="card-link">阅读全文 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="浅梦新河02.png" class="card-image" alt="溶液配置">
+                <span class="card-category">溶液配置</span>
+                <h3 class="card-title">注意事项 · 浓度配置</h3>
+                <p class="card-description">溶液配置的注意事项，新人需要了解的大致内容</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 浅梦星河</span>
+                    <a href="05.html" class="card-link">阅读全文 →</a>
+                </div>
+            </article>
+        </div>
+
+        <div class="section-header" id="techniques">
+            <h2 class="section-title">后期</h2>
+        </div>
+
+        <div class="card-grid">
+            <article class="card">
+                <img src="浅梦新河.png" class="card-image" alt="保存方法">
+                <span class="card-category">晶体保存</span>
+                <h3 class="card-title">怎么保存 · 长期保存</h3>
+                <p class="card-description">了解6大保存法的优缺点，选自己最适合的方法</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 浅梦星河</span>
+                    <a href="04.html" class="card-link">阅读全文 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="浅梦新河03.png" class="card-image" alt="晶体摄影">
+                <span class="card-category">晶体摄影</span>
+                <h3 class="card-title">晶体作品 · 拍摄技巧</h3>
+                <p class="card-description">怎么拍才能把晶体拍得好看？都有哪些技巧呢？</p>
+                <div class="card-footer">
+                    <span class="card-author">📷 浅梦星河</span>
+                    <a href="06.html" class="card-link">阅读全文 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="book.png" class="card-image" alt="图书馆">
+                <span class="card-category">图书馆</span>
+                <h3 class="card-title">电子书刊 · 自学推荐</h3>
+                <p class="card-description">一些更为学术性、内容更为丰富的书刊推荐</p>
+                <div class="card-footer">
+                    <a href="08.html" class="card-link">前往阅读 →</a>
+                </div>
+            </article>
+        </div>
+        
+        <div class="section-header" id="techniques">
+            <h2 class="section-title">其他</h2>
+        </div>
+
+        <div class="card-grid">
+            <article class="card">
+                <img src="team.png" class="card-image" alt="鸣谢">
+                <span class="card-category">鸣谢</span>
+                <h3 class="card-title">感谢大佬 · 提供支援</h3>
+                <p class="card-description">本指南的诞生离不开众多领域专家，因此特谢</p>
+                <div class="card-footer">
+                    <a href="09.html" class="card-link">前往查看 →</a>
+                </div>
+            </article>
             </div>
-
-            <div class="section-title">
-                <h2>专题</h2>
-            </div>
-            <div class="card-grid">
-                <article class="card">
-                    <div class="image-container">
-                    <img src="indexc2_01.png" alt="结晶方式" loading="lazy">
-                    <div class="author-name">图源：LX虫管吖Galvin</div> 
-                </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>结晶方式</h3>
-                            <p class="card-meta">基础方法 · 操作指南</p>
-                        </div>
-                        <p>掌握基础结晶原理，了解溶液配置与操作注意事项。</p>
-                        <div class="card-footer">
-                            <a href="01.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image-container">
-                    <img src="indexc2_02.png" alt="入门晶体" loading="lazy">
-                    <div class="author-name">图源：紫色硫酸铜</div> 
-                </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>入门晶体</h3>
-                            <p class="card-meta">单晶培养 · 溶液控制</p>
-                        </div>
-                        <p>开始接触晶体化学这门有趣的科目，有哪些晶体可以制作？</p>
-                        <div class="card-footer">
-                            <a href="w1.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image-container">
-                    <img src="浅梦新河02.png" alt="溶液配置" loading="lazy">
-                    <div class="author-name">图源：浅梦星河</div> 
-                </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>溶液配置</h3>
-                            <p class="card-meta">注意事项 · 浓度配置</p>
-                        </div>
-                        <p>溶液配置的注意事项，新人需要了解的大致内容</p>
-                        <div class="card-footer">
-                            <a href="05.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
-            
-            </div>
-
-            <div class="section-title">
-                <h2>其他</h2>
-            </div>
-            <div class="card-grid">
-                <article class="card">
-                    <div class="image-container">
-                    <img src="浅梦新河.png" alt="保存方法" loading="lazy">
-                    <div class="author-name">图源：浅梦星河</div> 
-                </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>晶体保存</h3>
-                            <p class="card-meta">怎么保存 · 长期保存</p>
-                        </div>
-                        <p>了解6大保存法的优缺点，选自己最适合的方法</p>
-                        <div class="card-footer">
-                            <a href="04.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image-container">
-                    <img src="浅梦新河03.png" alt="晶体摄影" loading="lazy">
-                    <div class="author-name">图源：浅梦星河</div> 
-                </div>
-                    <div class="card-content">
-                        <div>
-                            <h3>晶体摄影</h3>
-                            <p class="card-meta">晶体作品 · 拍摄技巧</p>
-                        </div>
-                        <p>怎么拍才能把晶体拍得好看？都有哪些技巧呢？</p>
-                        <div class="card-footer">
-                            <a href="06.html">阅读全文 →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="book.png" alt="" loading="lazy">
-                    <div class="card-content">
-                        <div>
-                            <h3>图书馆</h3>
-                            <p class="card-meta">电子书刊 · 自学推荐</p>
-                        </div>
-                        <p>一些更为学术性、内容更为丰富的书刊推荐。对这个领域想深造的十分友好。</p>
-                        <div class="card-footer">
-                            <a href="08.html">前往阅读</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="team.png" alt="" loading="lazy">
-                    <div class="card-content">
-                        <div>
-                            <h3>鸣谢</h3>
-                            <p class="card-meta">感谢大佬 · 提供支援</p>
-                        </div>
-                        <p>本指南的诞生离不开众多领域专家，因此特谢</p>
-                        <div class="card-footer">
-                            <a href="09.html">前往阅读</a>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="section-divider"></div>
-        </main>
+        </div>
 
         <footer class="site-footer">
-            声明：本站内容主要让新人快速入门，日后有时间再制作详细补充<br>
-            本站作者：麒麟（kun）
+            <p>© 2024 CrystalLab ｜ 站主：冰麒麟（kun）</p>
         </footer>
     </div>
 
@@ -655,128 +731,176 @@
             <h3>📢 更新公告</h3>
             <div class="update-list">
                 <div class="update-item">
-                    <time>2024-02-10</time>
-                    <span>新增鸣谢栏位、单质晶体开设、金属铋章节开设</span>
-                </div>
-                <div class="update-item">
                     <time>2024-02-11</time>
                     <span>css共用文件设立、增添作品集图片</span>
                 </div>
                 <div class="update-item">
                     <time>2024-02-12</time>
-                    <span>可能优化设计、排版</span>
+                    <span>优化首页设计</span>
                 </div>
             </div>
             <button class="close-popup">×</button>
         </div>
     </div>
+<script>
 
-    <div class="update-popup">
-        <div class="popup-content">
-            <h3>📢 站主祝福</h3>
-            <div class="update-list">
-                <div class="update-item">
-                    <span>祝大家养晶必出大饼，出饼RLCZ，重做继续出饼~hiahiahia</span>
-                </div>
-            </div>
-            <button class="close-popup">×</button>
-        </div>
-    </div>
-
-    <script>
-        // 交互功能
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+    const currentAnnouncementVersion = 'v2025-02-12-v4';
+            // 交互功能
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
+
+            document.querySelectorAll('a[disabled]').forEach(link => {
+                link.addEventListener('click', (e) => e.preventDefault());
+            });
+
+            // 卡片动态效果
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // 图片加载处理
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                img.style.opacity = 0;
+                img.addEventListener('load', () => {
+                    img.style.opacity = 1;
+                    img.style.transition = 'opacity 0.6s ease';
+                });
+            });
+
+            function getTodayDate() {
+                const today = new Date();
+                return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            }
+
+            function shouldShowPopup() {
+                const storedData = localStorage.getItem('announcementData');
+                if (!storedData) return true;
+                
+                try {
+                    const { version, date } = JSON.parse(storedData);
+                    
+                    // 版本号不匹配时必定显示
+                    if (version !== currentAnnouncementVersion) return true;
+                    
+                    // 版本号匹配但日期不是今天时显示
+                    return date !== getTodayDate();
+                } catch {
+                    return true;
+                }
+            }
+
+            function setPopupShown() {
+            const data = {
+                version: currentAnnouncementVersion,
+                date: getTodayDate()
+            };
+            localStorage.setItem('announcementData', JSON.stringify(data));
+            }
+
+            // 显示所有公告弹窗
+            function showUpdatePopups() {
+            if (shouldShowPopup()) {
+                document.querySelectorAll('.update-popup').forEach(popup => {
+                    popup.classList.add('show');
+                });
+                setPopupShown();
+            }
+            }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(showUpdatePopups, 1000);
+
+            document.querySelectorAll('.close-popup').forEach(button => {
+                button.addEventListener('click', () => {
+                    const popup = button.closest('.update-popup');
+                    popup?.classList.remove('show');
+                });
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('update-popup')) {
+                    e.target.classList.remove('show');
+                }
+            });
+        });
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
         });
 
-        document.querySelectorAll('a[disabled]').forEach(link => {
-            link.addEventListener('click', (e) => e.preventDefault());
+        // 移动端菜单切换
+        document.querySelector('.menu-toggle').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         });
 
-        // 卡片动态效果
+        // 点击外部关闭菜单
+        document.addEventListener('click', (e) => {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.classList.contains('active') && !e.target.closest('.nav-links')) {
+                navLinks.classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            }
+        });
+
+        // 窗口resize时重置菜单
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            }
+        });
+
+        // 卡片视差效果
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${y * 8}deg)
+                    rotateY(${x * 8}deg)
+                    translateZ(20px)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         });
 
-        // 图片加载处理
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-            img.style.opacity = 0;
-            img.addEventListener('load', () => {
-                img.style.opacity = 1;
-                img.style.transition = 'opacity 0.6s ease';
-            });
-        });
-
-        const currentAnnouncementVersion = 'v2025-02-10-v2';
-
-    function getTodayDate() {
-        const today = new Date();
-        return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    }
-
-    function shouldShowPopup() {
-        const storedData = localStorage.getItem('announcementData');
-        if (!storedData) return true;
-        
-        try {
-            const { version, date } = JSON.parse(storedData);
-            
-            // 版本号不匹配时必定显示
-            if (version !== currentAnnouncementVersion) return true;
-            
-            // 版本号匹配但日期不是今天时显示
-            return date !== getTodayDate();
-        } catch {
-            return true;
-        }
-    }
-
-    function setPopupShown() {
-        const data = {
-            version: currentAnnouncementVersion,
-            date: getTodayDate()
-        };
-        localStorage.setItem('announcementData', JSON.stringify(data));
-    }
-
-    // 显示所有公告弹窗
-    function showUpdatePopups() {
-        if (shouldShowPopup()) {
-            document.querySelectorAll('.update-popup').forEach(popup => {
-                popup.classList.add('show');
-            });
-            setPopupShown();
-        }
-    }
-
-    // 初始化（保持原有的事件监听代码不变）
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(showUpdatePopups, 1000);
-
-        document.querySelectorAll('.close-popup').forEach(button => {
-            button.addEventListener('click', () => {
-                const popup = button.closest('.update-popup');
-                popup?.classList.remove('show');
-            });
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('update-popup')) {
-                e.target.classList.remove('show');
+        // 粒子动画
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    width: ${Math.random() * 6 + 4}px;
+                    height: ${Math.random() * 6 + 4}px;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                particles.appendChild(particle);
             }
-        });
-    });
-    </script>
+        }
+        createParticles();
+</script>
 </body>
 </html>
