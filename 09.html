@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="icon.png" type="image/png">
-    <title>晶体化学指南 - 特别鸣谢</title>
+    <title>晶体化学指南 - 鸣谢与团队</title>
     <style>
         :root {
             --primary: #2A5C84;
@@ -23,22 +23,104 @@
             background: linear-gradient(15deg, #f8f9ff 0%, #e8f4ff 100%);
             line-height: 1.6;
             color: #333;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
+        /* 导航栏 */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(42,92,132,0.1);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            height: 60px;
+            background: rgba(255,255,255,0.98);
+        }
+
+        .nav-container {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .content {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2A5C84;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #5DA8B3;
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2A5C84;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #5DA8B3;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* 内容容器 */
+        .main-container {
+            max-width: 1200px;
+            margin: 140px auto 60px;
+            padding: 0 40px;
+        }
+
+        /* 鸣谢部分 */
+        .honor-section {
             background: white;
             padding: 50px;
             border-radius: 20px;
             box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
         }
 
         h1 {
@@ -59,7 +141,7 @@
             background: var(--secondary);
         }
 
-        /* 特别鸣谢卡片 */
+        /* 鸣谢卡片 */
         .honor-card {
             background: #f9fbfd;
             padding: 2rem;
@@ -129,22 +211,160 @@
             opacity: 0.3;
         }
 
+        /* 团队部分 */
+        .team-section {
+            padding: 60px 0;
+        }
+
+        .hero-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title h1 {
+            font-size: 3.5rem;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .hero-title h1::after {
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(249,251,253,0.95));
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 16px 40px rgba(42,92,132,0.08);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--secondary), transparent 30%);
+            animation: rotate 6s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .member-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 头像样式 */
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 4px solid white;
+            box-shadow: 0 12px 24px rgba(42,92,132,0.15);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 悬停动效 */
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 48px rgba(42,92,132,0.12);
+        }
+
+        .member-card:hover .avatar {
+            transform: scale(1.05);
+            box-shadow: 0 16px 32px rgba(42,92,132,0.2);
+        }
+
+        /* 文字样式 */
+        .member-name {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-desc {
+            color: #555;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            .main-container {
+                padding: 0 20px;
+                margin-top: 100px;
             }
-            .content {
+
+            .honor-section {
                 padding: 30px;
             }
+
             h1 {
                 font-size: 2.2rem;
+            }
+
+            .hero-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .team-grid {
+                gap: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <main class="content">
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">CrystalLab</a>
+            <div class="nav-links">
+                <a href="w1.html" class="nav-link">培养指南</a>
+                <a href="07.html" class="nav-link">作品展示</a>
+                <a href="#team" class="nav-link">核心团队</a>
+                <a href="002.html" class="nav-link">联系投稿</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- 鸣谢部分 -->
+        <section class="honor-section">
             <h1>晶体化学指南<br><span style="font-size:0.6em; color:var(--secondary)">特别鸣谢</span></h1>
 
             <div class="honor-card">
@@ -223,7 +443,79 @@
                 <p>感谢超过百位晶体化学领域的爱好者，他们在实验探索、数据分享、摄影记录及知识交流等方面提供了宝贵支持，促使本指南更加完善</p>
                 <a href="index.html" style="display:inline-block; margin-top:1.5rem; padding:12px 24px; background:var(--primary); color:white; border-radius:8px; text-decoration:none;">返回首页</a>
             </div>
-        </main>
+        </section>
+
+        <!-- 核心团队 -->
+        <section id="team" class="team-section">
+            <div class="hero-title">
+                <h1>核心团队</h1>
+                <p style="color: var(--secondary); margin-top: 1rem;">晶体化学指南网</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-content">
+                        <div class="avatar">
+                            <img src="avatar1.jpg" alt="团队成员">
+                        </div>
+                        <h2 class="member-name">冰麒麟</h2>
+                        <p class="member-role">本站站主</p>
+                        <p class="member-desc">全栈开发者与数据分析师，构建了本指南的数字化平台。主导并开发全栈设计、配色、排版、内容与维护</p>
+                    </div>
+                </div>
+    
+                <div class="member-card">
+                    <div class="member-content">
+                        <div class="avatar">
+                            <img src="avatar2.jpg" alt="团队成员">
+                        </div>
+                        <h2 class="member-name">长街听风</h2>
+                        <p class="member-role">首席执行官 CEO</p>
+                        <p class="member-desc">本站标志总监督，参与并负责项目的整体规划，深入审查项目内容，修正错误，确保信息的准确性及专业性收集与整理行业知识文件</p>
+                    </div>
+                </div>
+    
+                <div class="member-card">
+                    <div class="member-content">
+                        <div class="avatar">
+                            <img src="avatar3.jpg" alt="团队成员">
+                        </div>
+                        <h2 class="member-name">Chlorine</h2>
+                        <p class="member-role">首席客户官 CCO</p>
+                        <p class="member-desc">关注不同版本的使用体验，提供针对性的改进方向，优化页面排版与交互逻辑。负责拓展专业资源，引荐相关领域的专家，推动项目迭代升级</p>
+                    </div>
+                </div>
+    
+                <div class="member-card">
+                    <div class="member-content">
+                        <div class="avatar">
+                            <img src="avatar4.jpg" alt="团队成员">
+                        </div>
+                        <h2 class="member-name">LX虫管吖Galvin</h2>
+                        <p class="member-role">首席数据官CDO</p>
+                        <p class="member-desc">参与各类章节的审校与扩写，确保内容准确、清晰、专业。撰写相关领域专文，补充重要概念，优化表述，并提出建设性建议，推动指南优化升级。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -456,6 +456,58 @@
             background: var(--primary);
         }
 
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 2rem;
+        }
+
+        #searchInput {
+            width: 200px;
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--primary);
+            border-radius: 2rem;
+            background: var(--surface);
+            color: var(--primary);
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(93,168,179,0.2);
+        }
+
+        #searchButton {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        #searchButton:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .search-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 12px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+        }
+
         @media (max-width: 480px) {
             .update-popup {
                 width: 90%;
@@ -523,25 +575,93 @@
             /* 侧边栏样式 */
             .nav-links {
                 position: fixed;
-                top: 60px;
-                right: -100%;
-                width: 50%;
-                height: calc(100vh - 60px);
-                background: rgba(255,255,255,0.98);
-                backdrop-filter: blur(10px);
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255,255,255,0.86);
+                backdrop-filter: blur(20px);
+                display: flex;
                 flex-direction: column;
-                padding: 1rem;
-                transition: transform 0.3s ease;
-                box-shadow: -4px 0 15px rgba(0,0,0,0.1);
-                z-index: 1000;
+                padding: 100px 2rem 2rem;
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 999;
+                box-shadow: none;
+                border-radius: 0;
+                overflow-y: auto;
             }
 
-            .nav-links.active {
-                right: 0;
-                transform: translateX(0);
+            .nav-link {
+                width: 100%;
+                padding: 1.2rem;
+                margin: 0.5rem 0;
+                border-radius: 16px;
+                background: rgba(255,255,255,0.4);
+                backdrop-filter: blur(4px);
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-size: 1.1rem;
+                color: var(--primary);
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(42,92,132,0.08);
             }
 
-        .container {
+                .nav-link:hover {
+                background: rgba(93,168,179,0.1);
+                transform: translateX(8px);
+                box-shadow: 0 6px 16px rgba(42,92,132,0.12);
+            }
+
+            /* 菜单图标 */
+            .nav-link::before {
+                content: '';
+                width: 24px;
+                height: 24px;
+                background: var(--secondary);
+                mask-size: contain;
+                mask-position: center;
+                mask-repeat: no-repeat;
+                transition: 0.3s ease;
+            }
+
+            /* 新增关闭按钮 */
+            .menu-close {
+                display: block;
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background: var(--primary);
+                border: none;
+                cursor: pointer;
+                transition: 0.3s ease;
+            }
+
+            .menu-close::before,
+            .menu-close::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 2px;
+                background: white;
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+
+            .menu-close::after {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+
+            .menu-close:hover {
+                background: var(--secondary);
+                transform: rotate(180deg);
+            }
+            .container {
                 padding: 0 1rem;
                 margin-top: 4rem;
             }
@@ -557,7 +677,68 @@
             .card-grid {
                 grid-template-columns: 1fr;
             }
-    }
+
+            .search-container {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            .search-container.active {
+                display: flex;
+            }
+
+            #searchInput {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+            }
+
+            .search-suggestions {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                border-radius: 0 0 1rem 1rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+
+            .suggestion-item {
+                padding: 12px 16px;
+                border-bottom: 1px solid #eee;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: background 0.2s;
+            }
+
+            .suggestion-item:hover {
+                background: var(--accent);
+            }
+
+            .nav-links.active + .search-container {
+                display: flex;
+                width: 100%;
+                margin: 1rem 0;
+            }
+            
+            #searchInput {
+                width: 100%;
+            }
+
+            .search-toggle {
+                display: block;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap&text=←→">
@@ -570,10 +751,20 @@
                 <span class="hamburger"></span>
             </button>
             <div class="nav-links">
+                <button class="menu-close"></button>
                 <a href="w1.html" class="nav-link">培养指南</a>
                 <a href="07.html" class="nav-link">作品展示</a>
                 <a href="09.html" class="nav-link">特别鸣谢</a>
                 <a href="002.html" class="nav-link">联系投稿</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="搜索晶体指南...">
+                <button class="search-toggle" id="mobileSearch">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor">
+                        <path d="M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16z"></path>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
             </div>
         </nav>
     </header>
@@ -738,6 +929,9 @@
             <button class="close-popup">×</button>
         </div>
     </div>
+
+    <script src="search.js"></script>
+
 <script>
 
     const currentAnnouncementVersion = 'v2025-02-16-v4';
@@ -796,7 +990,15 @@
                     return true;
                 }
             }
-
+            
+            // 移动端搜索栏切换
+            document.getElementById('mobileSearch').addEventListener('click', () => {
+                const searchContainer = document.querySelector('.search-container');
+                searchContainer.classList.toggle('active');
+                if (searchContainer.classList.contains('active')) {
+                    document.getElementById('searchInput').focus();
+                }
+            });
             function setPopupShown() {
             const data = {
                 version: currentAnnouncementVersion,
@@ -840,9 +1042,15 @@
 
         // 移动端菜单切换
         document.querySelector('.menu-toggle').addEventListener('click', (e) => {
-            e.stopPropagation();
-            document.querySelector('.nav-links').classList.toggle('active');
-            document.querySelector('.hamburger').classList.toggle('active');
+        e.stopPropagation();
+        document.querySelector('.nav-links').classList.toggle('active');
+        document.querySelector('.hamburger').classList.toggle('active');
+        });
+
+        // 关闭按钮事件
+        document.querySelector('.menu-close').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+        document.querySelector('.hamburger').classList.remove('active');
         });
 
         // 点击外部关闭菜单
