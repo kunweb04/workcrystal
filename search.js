@@ -79,7 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.hamburger').classList.remove('active');
         
         if (searchContainer.classList.contains('active')) {
-            document.getElementById('searchInput').focus();
+            setTimeout(() => { 
+                document.getElementById('searchInput').focus();
+                document.getElementById('searchInput').click();
+            }, 50);
         }
     });
 
@@ -90,10 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 点击外部关闭建议
     document.addEventListener('click', (e) => {
-        const isSearchInput = e.target.closest('#searchInput');
-        const isSearchContainer = e.target.closest('.search-container');
+        const isSearchElement = e.target.closest('.search-container') || 
+                               e.target.closest('#mobileSearch') ||
+                               e.target.closest('.search-suggestions');
     
-        if (!isSearchInput && !isSearchContainer) {
+        if (!isSearchElement) {
             searchContainer.classList.remove('active');
             suggestions.style.display = 'none';
         }
