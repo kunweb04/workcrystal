@@ -508,6 +508,22 @@
             z-index: 1001;
         }
 
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 1rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-height: 60vh;
+            overflow-y: auto;
+            z-index: 1002;
+            width: 100%;
+            margin-top: 4px;
+            display: none; /* 默认隐藏 */
+        }
+
         @media (max-width: 480px) {
             .update-popup {
                 width: 90%;
@@ -700,15 +716,7 @@
             }
 
             .search-suggestions {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                border-radius: 0 0 1rem 1rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                max-height: 60vh;
-                overflow-y: auto;
+                border-radius: 0 0 8px 8px;
             }
 
             .suggestion-item {
@@ -922,8 +930,8 @@
             <h3>📢 更新公告</h3>
             <div class="update-list">
                 <div class="update-item">
-                    <time>2024-02-23</time>
-                    <span>硫酸镍章节</span>
+                    <time>2024-02-24</time>
+                    <span>优化搜索栏</span>
                 </div>
             </div>
             <button class="close-popup">×</button>
@@ -934,7 +942,7 @@
 
 <script>
 
-    const currentAnnouncementVersion = 'v2025-02-16-v4';
+    const currentAnnouncementVersion = 'v2025-02-24-v4';
             // 交互功能
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {

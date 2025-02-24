@@ -89,14 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 点击外部关闭建议
-     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-container')) {
+    document.addEventListener('click', (e) => {
+        const isSearchInput = e.target.closest('#searchInput');
+        const isSearchContainer = e.target.closest('.search-container');
+    
+        if (!isSearchInput && !isSearchContainer) {
             searchContainer.classList.remove('active');
+            suggestions.style.display = 'none';
         }
-        if (!e.target.closest('.nav-links')) {
-            document.querySelector('.nav-links').classList.remove('active');
-            document.querySelector('.hamburger').classList.remove('active');
-        }
+    });
+
+    document.getElementById('searchInput').addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 
     // 键盘处理
